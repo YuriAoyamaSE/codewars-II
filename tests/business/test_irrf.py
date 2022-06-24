@@ -3,27 +3,28 @@ from src.business.tributos import Tributos
 
 
 class TestIrrf(TestCase):
-    
-    def test_base_calculo(self):
+
+    def test_parametros(self):
         # dado
-        vencimento = 3090
+        salario_base = 3000
+        comissao = 90
 
         # quando
-        tributo = Tributos(vencimento)
-        resultado = tributo.irff_base_calculo()
+        tributo = Tributos(salario_base, comissao)
+        resultado = tributo.irrf_parametros()
 
         # então
-        self.assertTrue(resultado == 2821)
+        self.assertTrue(
+            resultado == {'bc': 2810.2, 'aliquota': 0.075, 'deducao': 142.8})
 
-        
     def test_recolhimento(self):
         # dado
-        base_calculo = 2821
+        salario_base = 3000
+        comissao = 90
 
         # quando
-        tributo = Tributos(base_calculo)
-        resultado = tributo.irff_recolhimento()
+        tributo = Tributos(salario_base, comissao)
+        resultado = tributo.irrf_recolhimento()
 
         # então
-        self.assertTrue(resultado == 68.78)
-
+        self.assertTrue(resultado == 67.96)

@@ -1,8 +1,10 @@
 
 class Tributos():
 
-    def __init__(self, remuneracao) -> None:
-        self.remuneracao = remuneracao
+    def __init__(self, salario_base, comissao=0) -> None:
+        self.salario_base = salario_base
+        self.comissao = comissao
+        self.vencimentos = self.salario_base + self.comissao
 
     def inss_aliquota() -> dict:
         faixa_aliquota = [0.075, 0.09, 0.12, 0.14]
@@ -18,19 +20,37 @@ class Tributos():
 
     def inss_recolhimento(self) -> float:
         aliquotas = Tributos.inss_aliquota()
-        valor = self.remuneracao
+        valor = self.vencimentos
         recolhimento = 0
         for faixa, aliquota in aliquotas.items():
             if faixa < valor:
                 valor -= faixa
-                recolhimento += round(faixa * aliquota, 2)
+                recolhimento += faixa * aliquota
             else:
-                recolhimento += round(valor * aliquota, 2)
-                return recolhimento
-        return recolhimento
+                recolhimento += valor * aliquota
+                return round(recolhimento, 2)
+        return round(recolhimento, 2)
 
-    def irrf_base_calculo(self) -> float:
-        pass
+    def irrf_parametros(self) -> dict:
+        base_de_calculo = round(self.vencimentos - self.inss_recolhimento(), 2)
+        if base_de_calculo <= 1903.88:
+            aliquota = 0
+            deducao = 0
+        elif base_de_calculo <= 2826.65:
+            aliquota = 0.075
+            deducao = 142.80
+        elif base_de_calculo <= 3751.05:
+            aliquota = 0.15
+            deducao = 354.80
+        elif base_de_calculo <= 4664.68:
+            aliquota = 0.225
+            deducao = 636.13
+        else:
+            aliquota = 27.5
+            deducao = 869.36
+        return {'bc': base_de_calculo, 'aliquota': aliquota, 'deducao': deducao}
 
     def irrf_recolhimento(self) -> float:
-        pass
+        parametro = self.irrf_parametros()
+        recolhimento = parametro['bc'] * parametro['aliquota'] - parametro['deducao']
+        return round(recolhimento, 2)
