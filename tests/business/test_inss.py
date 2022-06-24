@@ -13,7 +13,7 @@ class TestInss(TestCase):
         resultado = tributo.inss_recolhimento()
 
         # então
-        self.assertTrue(resultado == 8.40)
+        self.assertTrue(resultado == 82.50)
 
     def test_faixa_2(self):
         # dado
@@ -25,6 +25,7 @@ class TestInss(TestCase):
 
         # então
         self.assertTrue(resultado == 116.82)
+
 
     def test_faixa_3(self):
         # dado
