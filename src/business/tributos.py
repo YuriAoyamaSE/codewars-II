@@ -28,3 +28,9 @@ class Tributos():
                 recolhimento += round(valor * aliquota, 2)
                 return recolhimento
         return recolhimento
+
+    def irrf_base_calculo(self) -> float:
+        pass
+
+    def irrf_recolhimento(self) -> float:
+        pass
