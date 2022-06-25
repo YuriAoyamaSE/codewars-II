@@ -33,7 +33,7 @@ class Tributos():
 
     def irrf_parametros(self) -> dict:
         base_de_calculo = round(self.vencimentos - self.inss_recolhimento(), 2)
-        if base_de_calculo <= 1903.88:
+        if base_de_calculo <= 1903.98:
             aliquota = 0
             deducao = 0
         elif base_de_calculo <= 2826.65:
@@ -52,5 +52,6 @@ class Tributos():
 
     def irrf_recolhimento(self) -> float:
         parametro = self.irrf_parametros()
-        recolhimento = parametro['bc'] * parametro['aliquota'] - parametro['deducao']
+        recolhimento = parametro['bc'] * \
+            parametro['aliquota'] - parametro['deducao']
         return round(recolhimento, 2)
