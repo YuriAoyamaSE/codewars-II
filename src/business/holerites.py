@@ -18,7 +18,7 @@ class Holerites():
     def __init__(self) -> None:
         pass
     
-    def buscar_holerite(self, mes):
+    def gerar_holerite(self, mes):
         pass
     
     def listar_holerites(self, mes):
