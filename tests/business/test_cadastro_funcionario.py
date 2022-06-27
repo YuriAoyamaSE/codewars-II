@@ -14,62 +14,36 @@ class TestInss(TestCase):
             'fulano2', '22345678900', '2022-07-06', '30', True)
         self.cadastro3 = CadastroFuncionario(
             'fulano3', '32345678900', '2022-08-06', '50', False)
+        self.cadastro1.inclusao()
+        self.cadastro2.inclusao()
+        self.cadastro3.inclusao()
 
     def inclusao(self):
         # dado
+        cadastro4 = CadastroFuncionario(
+            'fulano4', '42345678900', '2022-09-06', '10', False)
         cnx = gerar_cnx()
-        cursor = gerar_cursor()
-        cursor.rowcount()
-        fechar_cursor()
-        fechar_cnx() 
-        
-        # quando
+        cursor = gerar_cursor(cnx)
+        operacao = "SELECT * FROM codewars2.cargos"
 
-        resultado = tributo.inss_recolhimento()
+        # quando
+        cadastro4.inclusao()
+        cursor.execute(operacao)
+        resultado = cursor.rowcount()
+        fechar_cursor(cursor)
+        fechar_cnx(cnx)
 
         # então
-        self.assertTrue(resultado == 82.50)
+        self.assertTrue(resultado == 4)
 
     def exclusao(self):
-        # dado
-        vencimentos = 1_100
-
-        # quando
-        tributo = Tributos(vencimentos)
-        resultado = tributo.inss_recolhimento()
-
-        # então
-        self.assertTrue(resultado == 82.50)
+        pass
 
     def consulta(self):
-        # dado
-        vencimentos = 1_100
-
-        # quando
-        tributo = Tributos(vencimentos)
-        resultado = tributo.inss_recolhimento()
-
-        # então
-        self.assertTrue(resultado == 82.50)
+        pass
 
     def alteracao(self):
-        # dado
-        vencimentos = 1_100
-
-        # quando
-        tributo = Tributos(vencimentos)
-        resultado = tributo.inss_recolhimento()
-
-        # então
-        self.assertTrue(resultado == 82.50)
+        pass
 
     def listagem(self):
-        # dado
-        vencimentos = 1_100
-
-        # quando
-        tributo = Tributos(vencimentos)
-        resultado = tributo.inss_recolhimento()
-
-        # então
-        self.assertTrue(resultado == 82.50)
+        pass

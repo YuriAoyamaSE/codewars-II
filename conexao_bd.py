@@ -35,9 +35,9 @@ def fechar_cursor(cursor):
 
     def funcao(self) -> None:
         cnx = gerar_cnx()
-        cursor = gerar_cursor()
+        cursor = gerar_cursor(cnx)
         
-        salvar_commit()
-        fechar_cursor()
-        fechar_cnx()
+        salvar_commit(cnx)
+        fechar_cursor(cursor)
+        fechar_cnx(cnx)
 """
