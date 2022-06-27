@@ -51,10 +51,13 @@ class CadastroFuncionario():
         cnx.close()
         return funcionarios_list_dict
 
-    # def funcao(self) -> None:
-    #     cnx = gerar_cnx
-    #     cursor = gerar_cursor
-
-    #     salvar_commit()
-    #     fechar_cursor()
-    #     fechar_cnx()
+    def alteracao(numero_matricula, alteracoes:dict) -> None:
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        for chave, valor in alteracoes.items():
+            insert_query = f"UPDATE funcionarios SET {chave} = '{valor}' WHERE matricula = {numero_matricula};"
+            cursor.execute(insert_query)
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+    

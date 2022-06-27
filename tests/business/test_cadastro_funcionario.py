@@ -63,25 +63,46 @@ class TestCadastroFuncionario(TestCase):
         # então
         self.assertTrue(resultado == rows_final)
 
-
     def test_consulta(self):
+        # dado
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM funcionarios")
+        listagem = cursor.fetchall()
+        rows_inicial = cursor.rowcount
+        matricula = listagem[0][0]
+
+        # quando
+        CadastroFuncionario.exclusao(matricula)
+        cnx.commit()
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_final = cursor.rowcount
+        resultado = rows_inicial - 1
+        cursor.close()
+        cnx.close()
+
+        # então
+        self.assertTrue(resultado == rows_final)
+
+    def test_alteracao(self):
         # dado
         cnx = gerar_cnx()
         cursor = cnx.cursor(dictionary=True)
         cursor.execute("SELECT * FROM funcionarios ORDER BY matricula DESC LIMIT 1;")
-        funcionario = cursor.fetchall()[0]
-        matricula = funcionario['matricula']
+        funcionario_dict = cursor.fetchall()[0]
+        matricula = funcionario_dict['matricula']
+        funcionario_update = {'matricula': matricula, 'nome': 'ALTERADO', 'cpf':'99999999999', 'data_admissao': '5555-55-55', 'cargo': '10', 'comissao': 0}
 
         # quando
+        CadastroFuncionario.alteracao(matricula, {'nome': 'ALTERADO', 'cpf':'99999999999', 'data_admissao': '5555-55-55', 'cargo': '10', 'comissao': 0})
+        cnx.commit()
         resultado = CadastroFuncionario.consulta(matricula)        
         cursor.close()
         cnx.close()
 
         # então
-        self.assertTrue(resultado == funcionario)
-
-    def test_alteracao(self):
-        pass
+        self.assertTrue(resultado == funcionario_update)
 
     def test_listagem(self):
         # dado
