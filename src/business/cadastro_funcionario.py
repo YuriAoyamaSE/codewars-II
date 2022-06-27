@@ -25,9 +25,12 @@ class CadastroFuncionario():
         cursor.close()
         cnx.close()
 
-    def consultar_por_matricula(self, numero):
-        
-        entidade = list(filter(lambda x: x.id == id, self.__lista))
+    def consulta(numero_matricula) -> dict:
+        listagem = CadastroFuncionario.listagem()
+        for funcionario in listagem:
+            if funcionario['matricula'] == numero_matricula:
+                return (funcionario)
+        return None
 
     # def remover_por_id(self, id: str) -> None:
     #     entidade = self.consultar(id)

@@ -1,3 +1,4 @@
+from calendar import c
 from unittest import TestCase
 from src.business.cadastro_funcionario import CadastroFuncionario
 from conexao_bd import gerar_cnx
@@ -47,25 +48,18 @@ class TestCadastroFuncionario(TestCase):
     def test_consulta(self):
         # dado
         cnx = gerar_cnx()
-        cursor = cnx.cursor()
-        cadastro4 = CadastroFuncionario(
-            'fulano4', '42345678900', '2022-09-06', '10', False)
-        cursor.execute("SELECT * FROM funcionarios")
-        cursor.fetchall()
-        rows_inicial = cursor.rowcount
+        cursor = cnx.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM funcionarios ORDER BY matricula DESC LIMIT 1;")
+        funcionario = cursor.fetchall()[0]
+        matricula = funcionario['matricula']
 
         # quando
-        cadastro4.inclusao()
-        cnx.commit()
-        cursor.execute("SELECT * FROM funcionarios")
-        cursor.fetchall()
-        rows_final = cursor.rowcount
-        resultado = rows_inicial + 1
+        resultado = CadastroFuncionario.consulta(matricula)        
         cursor.close()
         cnx.close()
 
         # então
-        self.assertTrue(resultado == rows_final)
+        self.assertTrue(resultado == funcionario)
 
     def test_alteracao(self):
         pass
