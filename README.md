@@ -13,4 +13,4 @@
         
         PORT='[porta de acesso]'
 
-=> Necessário gerar um BD, podendo executar o arquivo gerar_bd.py (mysql)
+=> Necessário gerar um BD, podendo executar os arquivos gerar_bd.py e gerar_cargos.py (molde: mysql)

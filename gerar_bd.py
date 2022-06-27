@@ -31,11 +31,11 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
-  `matricula` CHAR(6) NOT NULL,
+  `matricula` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
   `data_admissao` DATE NOT NULL,
-  `cargos_codigo` CHAR(10) NOT NULL,
+  `cargos_codigo` CHAR(2) NOT NULL,
   `comissao` TINYINT NOT NULL DEFAULT '0',
   PRIMARY KEY (`matricula`),
   INDEX `fk_funcionarios_cargos_idx` (`cargos_codigo` ASC) VISIBLE,
@@ -43,14 +43,8 @@ CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
     FOREIGN KEY (`cargos_codigo`)
     REFERENCES `mydb`.`cargos` (`codigo`))
 ENGINE = InnoDB
+AUTO_INCREMENT=100000
 DEFAULT CHARACTER SET = utf8mb3;
-
-INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('10', 'Cientista de Dados', '10200', '0.1');
-INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('20', 'Especialista em Business Intelligence', '7000', '0.08');
-INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('30', 'Desenvolvedor Mobile Sênior', '6700', '7');
-INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('31', 'Desenvolvedor Mobile Pleno', '3550', '6');
-INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('32', 'Desenvolvedor Júnior', '3000', '3');
-INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('50', 'Gerente de Projeto', '8900', '8');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
