@@ -1,4 +1,4 @@
-from conexao_bd import gerar_cnx, gerar_cursor, fechar_cnx, fechar_cursor, salvar_commit
+from conexao_bd import gerar_cnx
 
 
 class CadastroFuncionario():
@@ -12,18 +12,18 @@ class CadastroFuncionario():
 
     def inclusao(self) -> None:
         cnx = gerar_cnx()
-        cursor = gerar_cursor(cnx)
-        insert_query = "INSERT INTO codewars2.funcionarios(nome,cpf,data_admissao,cargo,comissao) VALUES (%s,%s,%s,%s,%s)"
+        cursor = cnx.cursor()
+        insert_query = "INSERT INTO funcionarios(nome,cpf,data_admissao,cargo,comissao) VALUES (%s,%s,%s,%s,%s)"
         insert_record = (self.nome, self.cpf, self.data_admissao,
                          self.cargo, self.comissao)
         cursor.execute(insert_query, insert_record)
-        salvar_commit(cnx)
+        cnx.commit()
 
-        insert_query = f"SELECT matricula FROM codewars2.funcionarios ORDER BY matricula DESC LIMIT 1;"
+        insert_query = f"SELECT matricula FROM funcionarios ORDER BY matricula DESC LIMIT 1;"
         cursor.execute(insert_query)
         self.matricula = cursor.fetchall()[0][0]
-        fechar_cursor(cursor)
-        fechar_cnx(cnx)
+        cursor.close()
+        cnx.close()
 
     # def consultar(self, id: str):
     #     entidade = list(filter(lambda x: x.id == id, self.__lista))

@@ -1,9 +1,9 @@
 from unittest import TestCase
 from src.business.cadastro_funcionario import CadastroFuncionario
-from conexao_bd import gerar_cnx, gerar_cursor, fechar_cnx, fechar_cursor, salvar_commit
+from conexao_bd import gerar_cnx
 
 
-class TestInss(TestCase):
+class TestCadastroFuncionario(TestCase):
 
     @classmethod
     def setUpClass(self):
@@ -20,21 +20,26 @@ class TestInss(TestCase):
 
     def test_inclusao(self):
         # dado
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
         cadastro4 = CadastroFuncionario(
             'fulano4', '42345678900', '2022-09-06', '10', False)
-        cnx = gerar_cnx()
-        cursor = gerar_cursor(cnx)
-        operacao = "SELECT * FROM codewars2.cargos"
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_inicial = cursor.rowcount
 
         # quando
         cadastro4.inclusao()
-        cursor.execute(operacao)
-        resultado = cursor.rowcount
-        fechar_cursor(cursor)
-        fechar_cnx(cnx)
+        cnx.commit()
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_final = cursor.rowcount
+        resultado = rows_inicial + 1
+        cursor.close()
+        cnx.close()
 
         # então
-        self.assertTrue(resultado == 4)
+        self.assertTrue(resultado == rows_final)
 
     def test_exclusao(self):
         pass
