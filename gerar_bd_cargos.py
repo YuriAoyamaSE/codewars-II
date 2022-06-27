@@ -18,10 +18,10 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE SCHEMA IF NOT EXISTS `codewars` DEFAULT CHARACTER SET utf8mb3 ;
-USE `codewars` ;
+CREATE SCHEMA IF NOT EXISTS `codewars2` DEFAULT CHARACTER SET utf8mb3 ;
+USE `codewars2` ;
 
-CREATE TABLE IF NOT EXISTS `codewars`.`cargos` (
+CREATE TABLE IF NOT EXISTS `codewars2`.`cargos` (
   `codigo` CHAR(2) NOT NULL,
   `descricao` VARCHAR(45) NOT NULL,
   `salario_base` FLOAT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `codewars`.`cargos` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-CREATE TABLE IF NOT EXISTS `codewars`.`funcionarios` (
+CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
   `matricula` CHAR(6) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
@@ -45,12 +45,12 @@ CREATE TABLE IF NOT EXISTS `codewars`.`funcionarios` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-INSERT INTO codewars.cargos(codigo, descricao, salario_base, comissao) VALUES ('10', 'Cientista de Dados', '10200', '0.1');
-INSERT INTO codewars.cargos(codigo, descricao, salario_base, comissao) VALUES ('20', 'Especialista em Business Intelligence', '7000', '0.08');
-INSERT INTO codewars.cargos(codigo, descricao, salario_base, comissao) VALUES ('30', 'Desenvolvedor Mobile Sênior', '6700', '7');
-INSERT INTO codewars.cargos(codigo, descricao, salario_base, comissao) VALUES ('31', 'Desenvolvedor Mobile Pleno', '3550', '6');
-INSERT INTO codewars.cargos(codigo, descricao, salario_base, comissao) VALUES ('32', 'Desenvolvedor Júnior', '3000', '3');
-INSERT INTO codewars.cargos(codigo, descricao, salario_base, comissao) VALUES ('50', 'Gerente de Projeto', '8900', '8');
+INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('10', 'Cientista de Dados', '10200', '0.1');
+INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('20', 'Especialista em Business Intelligence', '7000', '0.08');
+INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('30', 'Desenvolvedor Mobile Sênior', '6700', '7');
+INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('31', 'Desenvolvedor Mobile Pleno', '3550', '6');
+INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('32', 'Desenvolvedor Júnior', '3000', '3');
+INSERT INTO codewars2.cargos(codigo, descricao, salario_base, comissao) VALUES ('50', 'Gerente de Projeto', '8900', '8');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
