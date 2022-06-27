@@ -29,7 +29,7 @@ class TestInss(TestCase):
         # quando
         cadastro4.inclusao()
         cursor.execute(operacao)
-        resultado = cursor.rowcount()
+        resultado = cursor.rowcount
         fechar_cursor(cursor)
         fechar_cnx(cnx)
 
