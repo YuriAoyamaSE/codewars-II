@@ -32,9 +32,14 @@ class CadastroFuncionario():
                 return (funcionario)
         return None
 
-    # def remover_por_id(self, id: str) -> None:
-    #     entidade = self.consultar(id)
-    #     self.__lista.remove(entidade)
+    def exclusao(numero_matricula) -> None:
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        insert_query = "DELETE FROM funcionarios WHERE matricula = %s;"
+        cursor.execute(insert_query, [numero_matricula])
+        cnx.commit()
+        cursor.close()
+        cnx.close()
 
     def listagem():
         cnx = gerar_cnx()

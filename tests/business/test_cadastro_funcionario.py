@@ -43,7 +43,26 @@ class TestCadastroFuncionario(TestCase):
         self.assertTrue(resultado == rows_final)
 
     def test_exclusao(self):
-        pass
+        # dado
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM funcionarios")
+        listagem = cursor.fetchall()
+        rows_inicial = cursor.rowcount
+        matricula = listagem[0][0]
+
+        CadastroFuncionario.exclusao(matricula)
+        cnx.commit()
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_final = cursor.rowcount
+        resultado = rows_inicial - 1
+        cursor.close()
+        cnx.close()
+
+        # então
+        self.assertTrue(resultado == rows_final)
+
 
     def test_consulta(self):
         # dado
