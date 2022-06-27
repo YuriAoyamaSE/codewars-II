@@ -35,13 +35,9 @@ CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
   `nome` VARCHAR(45) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
   `data_admissao` CHAR(10) NOT NULL,
-  `cargos_codigo` CHAR(2) NOT NULL,
+  `cargo` CHAR(2) NOT NULL,
   `comissao` TINYINT NOT NULL DEFAULT '0',
-  PRIMARY KEY (`matricula`),
-  INDEX `fk_funcionarios_cargos_idx` (`cargos_codigo` ASC) VISIBLE,
-  CONSTRAINT `fk_funcionarios_cargos`
-    FOREIGN KEY (`cargos_codigo`)
-    REFERENCES `mydb`.`cargos` (`codigo`))
+  PRIMARY KEY (`matricula`))
 ENGINE = InnoDB
 AUTO_INCREMENT=100000
 DEFAULT CHARACTER SET = utf8mb3;
