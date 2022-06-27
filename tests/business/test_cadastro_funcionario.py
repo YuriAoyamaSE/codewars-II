@@ -18,7 +18,7 @@ class TestInss(TestCase):
         self.cadastro2.inclusao()
         self.cadastro3.inclusao()
 
-    def inclusao(self):
+    def test_inclusao(self):
         # dado
         cadastro4 = CadastroFuncionario(
             'fulano4', '42345678900', '2022-09-06', '10', False)
@@ -36,14 +36,14 @@ class TestInss(TestCase):
         # então
         self.assertTrue(resultado == 4)
 
-    def exclusao(self):
+    def test_exclusao(self):
         pass
 
-    def consulta(self):
+    def test_consulta(self):
         pass
 
-    def alteracao(self):
+    def test_alteracao(self):
         pass
 
-    def listagem(self):
+    def test_listagem(self):
         pass
