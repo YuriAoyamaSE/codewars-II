@@ -19,21 +19,29 @@ class CadastroFuncionario():
         cursor.execute(insert_query, insert_record)
         cnx.commit()
 
-        insert_query = f"SELECT matricula FROM funcionarios ORDER BY matricula DESC LIMIT 1;"
+        insert_query = "SELECT matricula FROM funcionarios ORDER BY matricula DESC LIMIT 1;"
         cursor.execute(insert_query)
         self.matricula = cursor.fetchall()[0][0]
         cursor.close()
         cnx.close()
 
-    # def consultar(self, id: str):
-    #     entidade = list(filter(lambda x: x.id == id, self.__lista))
+    def consultar_por_matricula(self, numero):
+        
+        entidade = list(filter(lambda x: x.id == id, self.__lista))
 
     # def remover_por_id(self, id: str) -> None:
     #     entidade = self.consultar(id)
     #     self.__lista.remove(entidade)
 
-    # def listar_todos(self) -> :
-    #     return self.__lista
+    def listagem():
+        cnx = gerar_cnx()
+        cursor = cnx.cursor(dictionary=True)
+        insert_query = "SELECT * FROM funcionarios;"
+        cursor.execute(insert_query)
+        funcionarios_list_dict = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        return funcionarios_list_dict
 
     # def funcao(self) -> None:
     #     cnx = gerar_cnx

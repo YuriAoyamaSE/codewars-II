@@ -45,10 +45,44 @@ class TestCadastroFuncionario(TestCase):
         pass
 
     def test_consulta(self):
-        pass
+        # dado
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cadastro4 = CadastroFuncionario(
+            'fulano4', '42345678900', '2022-09-06', '10', False)
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_inicial = cursor.rowcount
+
+        # quando
+        cadastro4.inclusao()
+        cnx.commit()
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_final = cursor.rowcount
+        resultado = rows_inicial + 1
+        cursor.close()
+        cnx.close()
+
+        # então
+        self.assertTrue(resultado == rows_final)
 
     def test_alteracao(self):
         pass
 
     def test_listagem(self):
-        pass
+        # dado
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM funcionarios")
+        cursor.fetchall()
+        rows_final = cursor.rowcount
+
+        # quando
+        listagem = CadastroFuncionario.listagem()
+        resultado = len(listagem)
+        cursor.close()
+        cnx.close()
+
+        # então
+        self.assertTrue(resultado == rows_final)
