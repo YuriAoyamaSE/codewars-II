@@ -13,31 +13,3 @@ def gerar_cnx():
         port=os.getenv('PORT'),
     )
     return cnx
-
-
-def salvar_commit(cnx):
-    cnx.commit()
-
-
-def fechar_cnx(cnx):
-    cnx.close()
-
-
-def gerar_cursor(cnx):
-    return cnx.cursor()
-
-
-def fechar_cursor(cursor):
-    cursor.close()
-
-
-""""Padrão:
-
-    def funcao(self) -> None:
-        cnx = gerar_cnx()
-        cursor = gerar_cursor(cnx)
-        
-        salvar_commit(cnx)
-        fechar_cursor(cursor)
-        fechar_cnx(cnx)
-"""
