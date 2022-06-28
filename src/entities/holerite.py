@@ -15,11 +15,11 @@ class Holerite():
         self.valor_comissao = round(
             float(self.funcionario.cargo_salario_base()) * self.comissao / 100, 2)
         self.tributos = Tributos(funcionario.salario_base, funcionario.comissao)
-        self.tx_inss = self.tributos.inss_aliquota().values()[0]
-        self.tx_irff = ''
-        self.valor_inss = ''
-        self.valor_irrf = ''
-        self.total_vencimentos = ''
+        self.valor_inss = self.tributos.inss_recolhimento()
+        self.valor_irrf = self.tributos.irrf_recolhimento()
+        self.tx_inss = self.tributos.inss_aliquota
+        self.tx_irff = self.tributos.irrf_aliquota
+        self.total_vencimentos = funcionario.
         self.total_descontos = ''
         self.liquido_receber = ''
         self.base_inss = ''

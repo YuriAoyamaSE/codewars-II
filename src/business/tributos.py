@@ -1,11 +1,12 @@
+from src.entities.funcionario import Funcionario
+
 
 class Tributos():
 
-    def __init__(self, salario_base, comissao=0) -> None:
-        self.salario_base = salario_base
-        self.comissao = comissao
-        self.vencimentos = salario_base + comissao
-        self.inss_aliquota = ''
+    def __init__(self, funcionario: Funcionario) -> None:
+        self.salario_base = funcionario.cargo_salario_base()
+        self.vencimentos = funcionario.cargo_salario_base(
+        ) * (1 + funcionario.cargo_comissao_valor())
 
     def inss_margem_aliquota(self) -> dict:
         faixa_aliquota = [0.075, 0.09, 0.12, 0.14]
@@ -27,13 +28,14 @@ class Tributos():
             if faixa < valor:
                 valor -= faixa
                 recolhimento += faixa * aliquota
-            else:
-                recolhimento += valor * aliquota
                 self.inss_aliquota = aliquota
+            else:
+                self.inss_aliquota = aliquota
+                recolhimento += valor * aliquota
                 return round(recolhimento, 2)
         return round(recolhimento, 2)
 
-    def irrf_parametros(self) -> dict:
+    def irrf_parametros(self):
         base_de_calculo = round(self.vencimentos - self.inss_recolhimento(), 2)
         if base_de_calculo <= 1903.98:
             aliquota = 0
@@ -50,10 +52,14 @@ class Tributos():
         else:
             aliquota = 27.5
             deducao = 869.36
-        return {'bc': base_de_calculo, 'aliquota': aliquota, 'deducao': deducao}
+        self.irrf_bc = base_de_calculo
+        self.irrf_aliquota = aliquota
+        self.irrf_deducao = deducao
 
     def irrf_recolhimento(self) -> float:
-        parametro = self.irrf_parametros()
-        recolhimento = parametro['bc'] * \
-            parametro['aliquota'] - parametro['deducao']
+        self.irrf_parametros()
+        recolhimento = self.irrf_bc * self.irrf_aliquota - self.irrf_deducao
         return round(recolhimento, 2)
+
+    def fgts_valor():
+        pass

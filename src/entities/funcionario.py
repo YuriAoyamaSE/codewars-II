@@ -24,7 +24,7 @@ class Funcionario():
         cnx.close()
         return output
 
-    def cargo_salario_base(self) -> str:
+    def cargo_salario_base(self) -> float:
         cnx = gerar_cnx()
         cursor = cnx.cursor()
         cursor.execute(
@@ -32,10 +32,10 @@ class Funcionario():
         output = cursor.fetchall()
         cursor.close()
         cnx.close()
-        return output
+        return float(output[0][0])
 
-    def cargo_comissao_valor(self) -> str:
-        if self.__comissao:
+    def cargo_comissao_valor(self) -> float:
+        if self.comissao:
             cnx = gerar_cnx()
             cursor = cnx.cursor()
             cursor.execute(
@@ -43,5 +43,5 @@ class Funcionario():
             output = cursor.fetchall()
             cursor.close()
             cnx.close()
-            return output
-        return '0'
+            return float(output[0][0])
+        return 0.0
