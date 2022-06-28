@@ -1,17 +1,39 @@
+from arquivos_inicializacao import gerar_bd, gerar_cargos, gerar_env
 from src.business.cadastro_funcionario import CadastroFuncionario
 from src.entities.funcionario import Funcionario
 from src.entities.holerite import Holerite
 
 
-def menu():
+def menu_inicializacao():
+    criando_env = input("""--------------------------------Menu de Inicialização--------------------------------
+Para conectar ao sistema de banco de dados da máquina local é imprescindível a existência
+de um arquivo .env com dados sensíveis. O arquivo estará seguro, pois está no rol do 
+.gitignore. Caso já não tenha o arquivo, gostaria que o sistema crie um? (s/n) """)
+    if criando_env:
+        gerar_env()
+
+    criar_banco_dados = input("""-------------------------------------------------------------------------------------
+Para o funcionamento do sistema, é necessária a existência de:
+=> Schema 'codewars2'
+    => Tabela 'funcionarios'
+    => Tabela 'cargos'
+    => Tabela 'holerites'
+Gostaria que o sistema gere o Banco de Dados? (s/n) """)
+    if criar_banco_dados == 's':
+        gerar_bd()
+        gerar_cargos()
+
+
+def menu_principal():
     print("""----------------------Menu----------------------
 [1] - Cadastrar novo funcionário
 [2] - Procurar dados de um funcionário
 [3] - Listar todos os funcionários
 [4] - Excluir funcionário
 [5] - Alterar dados de um funcionário
-[6] - Gerar holeritie de um funcionário
-[7] - Gerar lista de holerities de todos os funcionários
+[6] - Gerar holerite de um funcionário
+[7] - Gerar lista de holerites de um funcionário
+[8] - Gerar lista de holerites de todos os funcionários
 [0] - Sair""")
     return input()
 
@@ -36,6 +58,7 @@ def checar_funcionario(matricula):
     else:
         print('Funcionário não encontrado')
         return None
+
 
 def procurar_funcionario():
     print('-------------Procurar por funcionário-------------')
@@ -84,26 +107,36 @@ def alterar_funcionario():
         cadastro_funcionario.alteracao(matricula, alteracoes)
 
 
-
 def holerite_funcionario():
     print('---------Imprimir holerite de funcionario----------')
     matricula = int(input('Informe o número de matrícula: '))
     if checar_funcionario(matricula):
         funcionario = cadastro_funcionario.retornar_funcionario(matricula)
-        mes_ano = input('Informe o mês e ano da holerite: ')   
+        mes_ano = input('Informe o mês e ano da holerite: ')
         holerite = Holerite(funcionario)
         holerite.gerar_holerite(mes_ano, 2)
         holerite.imprimir_holerite()
 
 
-def listar_holerites():
+def imprimir_lista_holerites():
     pass
 
 
+def listar_holerites_individual():
+    lista_holerites = []
+    imprimir_lista_holerites(lista_holerites)
+
+
+def listar_todas_holerites():
+    lista_holerites = []
+    imprimir_lista_holerites(lista_holerites)
+
+
 if __name__ == '__main__':
+    menu_inicializacao()
     cadastro_funcionario = CadastroFuncionario()
     while True:
-        opcao = menu()
+        opcao = menu_principal()
         if opcao == '1':
             cadastrar_funcionario()
         elif opcao == '2':
@@ -117,7 +150,9 @@ if __name__ == '__main__':
         elif opcao == '6':
             holerite_funcionario()
         elif opcao == '7':
-            listar_holerites()
+            listar_holerites_individual()
+        elif opcao == '8':
+            listar_todas_holerites()
         elif opcao == '0':
             break
         else:

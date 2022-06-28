@@ -9,6 +9,7 @@
 
 
 ## Observações:
+### => Rodar sistema pelo main.py
 ### => Necessário um arquivo .env com dados de conexão com um BD (mySQL)
 
         NAME='[nome do bd]'        
@@ -17,7 +18,7 @@
         HOST='[ip do host]'        
         PORT='[porta de acesso]'
 
-### => Necessário gerar um BD, podendo executar os arquivos gerar_bd.py e gerar_cargos.py (molde: mysql)
+### => Necessário gerar um BD. Pode ser criado rodando o sistema, com o menude inicialização
 Contanto que o arquivo .env seja criado e preenchido com os dados sensíveis acima, rodar o arquivo gerar_bd.py vai criar os Bancos de Dados necessários para testar o projeto.
 Serão criados três BD, dentro de um Schema 'codewars2': 'funcionarios', 'cargos' e 'holerites'.
 Por sua vez, rodar o arquivo gerar_cargos.py vai preencher o BD 'cargos' com os cargos apresentados no exercício (conforme Holerities.xlsx).
