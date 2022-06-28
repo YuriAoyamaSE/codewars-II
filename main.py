@@ -1,4 +1,4 @@
-from arquivos_inicializacao import gerar_bd, gerar_cargos, gerar_env
+from arquivos_inicializacao import gerar_env, gerar_schema, gerar_table_cargos, gerar_table_funcionarios, gerar_table_holerites, preencher_cargos
 from src.business.cadastro_funcionario import CadastroFuncionario
 from src.entities.funcionario import Funcionario
 from src.entities.holerite import Holerite
@@ -9,19 +9,22 @@ def menu_inicializacao():
 Para conectar ao sistema de banco de dados da máquina local é imprescindível a existência
 de um arquivo .env com dados sensíveis. O arquivo estará seguro, pois está no rol do 
 .gitignore. Caso já não tenha o arquivo, gostaria que o sistema crie um? (s/n) """)
-    if criando_env:
+    if criando_env == 's':
         gerar_env()
 
     criar_banco_dados = input("""-------------------------------------------------------------------------------------
 Para o funcionamento do sistema, é necessária a existência de:
-=> Schema 'codewars2'
+    => Schema 'codewars2'
     => Tabela 'funcionarios'
     => Tabela 'cargos'
     => Tabela 'holerites'
 Gostaria que o sistema gere o Banco de Dados? (s/n) """)
     if criar_banco_dados == 's':
-        gerar_bd()
-        gerar_cargos()
+        gerar_schema()
+        gerar_table_cargos()
+        preencher_cargos()
+        gerar_table_funcionarios()
+        gerar_table_holerites()
 
 
 def menu_principal():

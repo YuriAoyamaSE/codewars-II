@@ -1,4 +1,4 @@
-from conexao_bd import gerar_cnx
+from conexao_bd import cnx_sem_database, gerar_cnx
 
 
 def gerar_env() -> None:
@@ -15,14 +15,19 @@ def gerar_env() -> None:
             arquivo.writelines(f"{chave}='{valor}'\n")
 
 
-def gerar_bd() -> None:
+def gerar_schema() -> None:
+    schema = "CREATE SCHEMA IF NOT EXISTS `codewars2` DEFAULT CHARACTER SET utf8mb3;"
+    cnx = cnx_sem_database()
+    cursor = cnx.cursor()
+    cursor.execute(schema)
+    cursor.close()
+    cnx.close()
+
+
+def gerar_table_cargos() -> None:
     cnx = gerar_cnx()
     cursor = cnx.cursor()
-
-    criar_tabelas = """
-    CREATE SCHEMA IF NOT EXISTS `codewars2` DEFAULT CHARACTER SET utf8mb3 ;
-    USE `codewars2` ;
-
+    comando = """USE codewars2;
     CREATE TABLE IF NOT EXISTS `codewars2`.`cargos` (
       `codigo` CHAR(2) NOT NULL,
       `descricao` VARCHAR(45) NOT NULL,
@@ -30,21 +35,35 @@ def gerar_bd() -> None:
       `comissao` VARCHAR(5) NULL DEFAULT '0',
       PRIMARY KEY (`codigo`))
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb3;
+    DEFAULT CHARACTER SET = utf8mb3;"""
+    cursor.execute(comando)
+    cursor.close()
+    cnx.close()
 
-    CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
+
+def gerar_table_funcionarios() -> None:
+    cnx = gerar_cnx()
+    cursor = cnx.cursor()
+    comando = """CREATE TABLE IF NOT EXISTS funcionarios (
       `matricula` INT NOT NULL AUTO_INCREMENT,
       `nome` VARCHAR(45) NOT NULL,
       `cpf` CHAR(11) NOT NULL,
       `data_admissao` CHAR(10) NOT NULL,
       `cargo` CHAR(2) NOT NULL,
       `comissao` TINYINT NOT NULL DEFAULT '0',
-      PRIMARY KEY (`matricula`,'cpf'))
+      PRIMARY KEY (`matricula`,`cpf`))
     ENGINE = InnoDB
     AUTO_INCREMENT=100000
-    DEFAULT CHARACTER SET = utf8mb3;
+    DEFAULT CHARACTER SET = utf8mb3;"""
+    cursor.execute(comando)
+    cursor.close()
+    cnx.close()
 
-    CREATE TABLE IF NOT EXISTS `codewars2`.`holerities` (
+
+def gerar_table_holerites() -> None:
+    cnx = gerar_cnx()
+    cursor = cnx.cursor()
+    comando = """CREATE TABLE IF NOT EXISTS `codewars2`.`holerities` (
       `mes_ano` VARCHAR(20) NOT NULL,
       `matricula` VARCHAR(45) NOT NULL,
       `funcionario` VARCHAR(45) NULL,
@@ -68,15 +87,13 @@ def gerar_bd() -> None:
       `liquido_receber` VARCHAR(45) NULL,
       PRIMARY KEY (`mes_ano`, `matricula`));
     ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb3;
-    """
-
-    cursor.execute(criar_tabelas)
+    DEFAULT CHARACTER SET = utf8mb3;"""
+    cursor.execute(comando)
     cursor.close()
     cnx.close()
 
 
-def gerar_cargos() -> None:
+def preencher_cargos() -> None:
     cnx = gerar_cnx()
     cursor = cnx.cursor()
 

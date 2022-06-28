@@ -13,3 +13,12 @@ def gerar_cnx():
         port=os.getenv('PORT'),
     )
     return cnx
+
+def cnx_sem_database():
+    cnx = mysql.connector.connect(
+        host=os.getenv('HOST'),
+        user=os.getenv('USER'),
+        password=os.getenv('PASSWORD'),
+        port=os.getenv('PORT'),
+    )
+    return cnx

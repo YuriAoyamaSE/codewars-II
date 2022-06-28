@@ -10,7 +10,7 @@
 
 ## Observações:
 ### => Rodar sistema pelo main.py
-### => Necessário um arquivo .env com dados de conexão com um BD (mySQL)
+### => Necessário um arquivo .env com dados de conexão com um BD (mySQL). Pode ser criado rodando o sistema, com o menu de inicialização
 
         NAME='[nome do bd]'        
         USER='[nome do usuário do bd]'        
@@ -18,10 +18,9 @@
         HOST='[ip do host]'        
         PORT='[porta de acesso]'
 
-### => Necessário gerar um BD. Pode ser criado rodando o sistema, com o menude inicialização
+### => Necessário gerar um BD. Pode ser criado rodando o sistema, com o menu de inicialização
 Contanto que o arquivo .env seja criado e preenchido com os dados sensíveis acima, rodar o arquivo gerar_bd.py vai criar os Bancos de Dados necessários para testar o projeto.
-Serão criados três BD, dentro de um Schema 'codewars2': 'funcionarios', 'cargos' e 'holerites'.
-Por sua vez, rodar o arquivo gerar_cargos.py vai preencher o BD 'cargos' com os cargos apresentados no exercício (conforme Holerities.xlsx).
+Serão criados três BD, dentro de um Schema 'codewars2': 'funcionarios', 'cargos' e 'holerites'. Também será preenchida tabela de 'cargos' com os dados passados no desafio.
 
 ### => O valor das faltas não foi especificado na documentação. Aplicado proporcional com o exemplo ([número de faltas] x [salário base] x [0.75] x [22.5])
 75% em relação ao salário base
