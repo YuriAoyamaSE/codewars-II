@@ -4,9 +4,6 @@ from src.entities.funcionario import Funcionario
 
 class CadastroFuncionario():
 
-    def __init__(self):
-        self.lista_funcionarios = []
-
     def inclusao(self, funcionario: Funcionario) -> None:
         cnx = gerar_cnx()
         cursor = cnx.cursor()
@@ -23,8 +20,8 @@ class CadastroFuncionario():
         cnx.close()
 
     def consulta(self, numero_matricula) -> dict:
-        CadastroFuncionario.listagem()
-        for funcionario in self.lista_funcionarios:
+        lista_funcionarios = self.listagem()
+        for funcionario in lista_funcionarios:
             if funcionario['matricula'] == numero_matricula:
                 return (funcionario)
         return None
@@ -37,17 +34,16 @@ class CadastroFuncionario():
         cnx.commit()
         cursor.close()
         cnx.close()
-        CadastroFuncionario.listagem()
 
     def listagem(self):
         cnx = gerar_cnx()
         cursor = cnx.cursor(dictionary=True)
         insert_query = "SELECT * FROM funcionarios;"
         cursor.execute(insert_query)
-        self.lista_funcionarios = cursor.fetchall()
+        lista_funcionarios = cursor.fetchall()
         cursor.close()
         cnx.close()
-        return self.lista_funcionarios
+        return lista_funcionarios
 
     def alteracao(self, numero_matricula, alteracoes: dict) -> None:
         cnx = gerar_cnx()
@@ -58,4 +54,3 @@ class CadastroFuncionario():
         cnx.commit()
         cursor.close()
         cnx.close()
-        CadastroFuncionario.listagem()
