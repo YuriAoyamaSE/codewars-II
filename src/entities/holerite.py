@@ -28,9 +28,12 @@ class Holerite():
     def gerar_holerite(self, mes_ano: str, faltas: int) -> None:
         self.mes_ano = mes_ano
         self.faltas = faltas
-        self.valor_faltas = faltas * (self.salario_base * 0.75 / 22.5)
-        self.total_descontos = self.valor_inss + self.valor_faltas + self.valor_irrf
-        self.liquido_receber = round(self.total_vencimentos - self.total_descontos,2)
+        self.valor_faltas = round(
+            faltas * (self.salario_base * 0.75 / 22.5), 2)
+        self.total_descontos = round(
+            self.valor_inss + self.valor_faltas + self.valor_irrf, 2)
+        self.liquido_receber = round(
+            self.total_vencimentos - self.total_descontos, 2)
 
     def holerites_cadastradas(self) -> None:
         cnx = gerar_cnx()

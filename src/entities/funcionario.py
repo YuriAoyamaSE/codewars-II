@@ -3,13 +3,13 @@ from conexao_bd import gerar_cnx
 
 class Funcionario():
 
-    def __init__(self, nome: str, cpf: str, data_admissao: str, cargo: str, comissao: bool):
+    def __init__(self, nome: str, cpf: str, data_admissao: str, cargo: str, comissao: bool, matricula = None):
         self.nome = nome
         self.cpf = cpf
         self.data_admissao = data_admissao
         self.cargo = cargo
         self.comissao = comissao
-        self.matricula = 'Funcionário não cadastrado'
+        self.matricula = 'Funcionário não cadastrado' if not matricula else matricula
 
     def __str__(self):
         return self.nome

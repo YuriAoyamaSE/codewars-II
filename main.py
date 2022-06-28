@@ -1,5 +1,6 @@
 from src.business.cadastro_funcionario import CadastroFuncionario
 from src.entities.funcionario import Funcionario
+from src.entities.holerite import Holerite
 
 
 def menu():
@@ -28,15 +29,21 @@ def cadastrar_funcionario():
     print('Cadastro efetuado com a matricula:', funcionario.matricula)
 
 
+def checar_funcionario(matricula):
+    funcionario = cadastro_funcionario.consulta(matricula)
+    if funcionario:
+        return funcionario
+    else:
+        print('Funcionário não encontrado')
+        return None
+
 def procurar_funcionario():
     print('-------------Procurar por funcionário-------------')
     matricula = int(input('Informe o número de matrícula: '))
-    funcionario = cadastro_funcionario.consulta(matricula)
+    funcionario = checar_funcionario(matricula)
     if funcionario:
         for chave, valor in funcionario.items():
             print(f'{chave}: {valor}')
-    else:
-        print('Funcionário não encontrado')
 
 
 def listar_funcionarios():
@@ -51,13 +58,15 @@ def listar_funcionarios():
 def excluir_funcionario():
     print('---------------Excluir funcionário---------------')
     matricula = int(input('Informe o número de matrícula: '))
-    cadastro_funcionario.exclusao(matricula)
+    funcionario = checar_funcionario(matricula)
+    if funcionario:
+        cadastro_funcionario.exclusao(matricula)
 
 
 def alterar_funcionario():
     print('-----------Alterar dados de funcionário-----------')
     matricula = int(input('Informe o número de matrícula: '))
-    funcionario = cadastro_funcionario.consulta(matricula)
+    funcionario = checar_funcionario(matricula)
     if funcionario:
         for chave, valor in funcionario.items():
             print(f'{chave}: {valor}')
@@ -73,12 +82,18 @@ def alterar_funcionario():
             escolha = input(
                 'Qual informação gostaria de alterar? Para sair, informe "0". ')
         cadastro_funcionario.alteracao(matricula, alteracoes)
-    else:
-        print('Funcionário não encontrado')
+
 
 
 def holerite_funcionario():
-    pass
+    print('---------Imprimir holerite de funcionario----------')
+    matricula = int(input('Informe o número de matrícula: '))
+    if checar_funcionario(matricula):
+        funcionario = cadastro_funcionario.retornar_funcionario(matricula)
+        mes_ano = input('Informe o mês e ano da holerite: ')   
+        holerite = Holerite(funcionario)
+        holerite.gerar_holerite(mes_ano, 2)
+        holerite.imprimir_holerite()
 
 
 def listar_holerites():

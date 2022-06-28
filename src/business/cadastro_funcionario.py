@@ -25,6 +25,11 @@ class CadastroFuncionario():
             if funcionario['matricula'] == numero_matricula:
                 return (funcionario)
         return None
+    
+    def retornar_funcionario(self, numero_matricula) -> Funcionario:
+        dados = self.consulta(numero_matricula)
+        funcionario = Funcionario(dados['nome'], dados['cpf'], dados['data_admissao'],dados['cargo'],dados['comissao'],dados['matricula'])
+        return funcionario
 
     def exclusao(self, numero_matricula) -> None:
         cnx = gerar_cnx()
