@@ -1,31 +1,56 @@
-from .entity import Entity
+from conexao_bd import gerar_cnx
 
-class Funcionario(Entity):
 
-    def __init__(self, id: int, nome: str, cpf: str, data_de_admissao: str, cargo: str, comissao: int):
-        super().__init__(id)
-        self.__nome: str = nome
-        self.__cpf: str = cpf
-        self.__data_de_admissao: str = data_de_admissao
-        self.__cargo: str = cargo
-        self.__comissao: str = comissao
+class Funcionario():
 
-    @property
-    def nome(self) -> str:
-        return self.__nome
+    def __init__(self, nome: str, cpf: str, data_de_admissao: str, cargo: str, comissao: bool):
+        self.nome: str = nome
+        self.cpf: str = cpf
+        self.data_de_admissao: str = data_de_admissao
+        self.cargo: str = cargo
+        self.comissao: str = comissao
 
-    @property
-    def cpf(self) -> str:
-        return self.__cpf
+    def __str__(self):
+        return self.nome
+    
+    def matricula(self):
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cursor.execute(
+            f"SELECT matricula FROM funcionarios WHERE cpf = {self.cpf};")
+        output = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        return output
+    
+    def cargo_descricao(self) -> str:
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cursor.execute(
+            f"SELECT descricao FROM cargos WHERE codigo = {self.cargo};")
+        output = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        return output
 
-    @property
-    def data_de_admissao(self) -> str:
-        return self.__data_de_admissao
+    def cargo_salario_base(self) -> str:
+        cnx = gerar_cnx()
+        cursor = cnx.cursor()
+        cursor.execute(
+            f"SELECT salario_base FROM cargos WHERE codigo = {self.cargo};")
+        output = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+        return output
 
-    @property
-    def cargo(self) -> str:
-        return self.__cargo
-
-    @property
-    def comissao(self) -> str:
-        return self.__comissao
+    def cargo_comissao_valor(self) -> str:
+        if self.__comissao:
+            cnx = gerar_cnx()
+            cursor = cnx.cursor()
+            cursor.execute(
+                f"SELECT comissao FROM cargos WHERE codigo = {self.cargo};")
+            output = cursor.fetchall()
+            cursor.close()
+            cnx.close()
+            return output
+        return '0'

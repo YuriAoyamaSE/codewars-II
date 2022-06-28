@@ -1,4 +1,3 @@
-from calendar import c
 from unittest import TestCase
 from src.business.cadastro_funcionario import CadastroFuncionario
 from conexao_bd import gerar_cnx
