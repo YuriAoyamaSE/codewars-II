@@ -11,14 +11,10 @@
 ## Observações:
 ### => Necessário um arquivo .env com dados de conexão com um BD (mySQL)
 
-        NAME='[nome do bd]'
-        
-        USER='[nome do usuário do bd]'
-        
-        PASSWORD='[senha do usuário]'
-        
-        HOST='[ip do host]'
-        
+        NAME='[nome do bd]'        
+        USER='[nome do usuário do bd]'        
+        PASSWORD='[senha do usuário]'        
+        HOST='[ip do host]'        
         PORT='[porta de acesso]'
 
 ### => Necessário gerar um BD, podendo executar os arquivos gerar_bd.py e gerar_cargos.py (molde: mysql)
@@ -26,3 +22,6 @@ Contanto que o arquivo .env seja criado e preenchido com os dados sensíveis aci
 Serão criados três BD, dentro de um Schema 'codewars2': 'funcionarios', 'cargos' e 'holerites'.
 Por sua vez, rodar o arquivo gerar_cargos.py vai preencher o BD 'cargos' com os cargos apresentados no exercício (conforme Holerities.xlsx).
 
+### => O valor das faltas não foi especificado na documentação. Aplicado proporcional com o exemplo ([número de faltas] x [salário base] x [0.75] x [22.5])
+75% em relação ao salário base
+22.5 foi a referência dada por dias de trabalho em um mês

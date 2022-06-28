@@ -50,7 +50,7 @@ class Tributos():
             aliquota = 0.225
             deducao = 636.13
         else:
-            aliquota = 27.5
+            aliquota = 0.275
             deducao = 869.36
         self.irrf_bc = base_de_calculo
         self.irrf_aliquota = aliquota
