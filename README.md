@@ -5,6 +5,7 @@
 ### => BD de holerite em construção (criado, não testado)
 ### => Sem tratamento de exceções
 ### => Funcionando: Sistema de cadastro de funcionários, cálculos de tributos, BD de funcionários, BD de cargos, funcionalidades respectivas.
+### => Funcionando parcial: main.py, menos a parte de holerites.
 
 
 ## Observações:
