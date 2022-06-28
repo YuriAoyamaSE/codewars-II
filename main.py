@@ -1,4 +1,3 @@
-from conexao_bd import gerar_cnx
 from src.business.cadastro_funcionario import CadastroFuncionario
 from src.entities.funcionario import Funcionario
 
@@ -25,14 +24,14 @@ def cadastrar_funcionario():
     comissao = input('O funcionário receberá comissão? (s/n): ')
     comissao = True if comissao == 's' else False
     funcionario = Funcionario(nome, cpf, data_admissao, cargo, comissao)
-    cadastro.inclusao(funcionario)
+    cadastro_funcionario.inclusao(funcionario)
     print('Cadastro efetuado com a matricula:', funcionario.matricula)
 
 
 def procurar_funcionario():
     print('-------------Procurar por funcionário-------------')
     matricula = int(input('Informe o número de matrícula: '))
-    funcionario = cadastro.consulta(matricula)
+    funcionario = cadastro_funcionario.consulta(matricula)
     if funcionario:
         for chave, valor in funcionario.items():
             print(f'{chave}: {valor}')
@@ -42,7 +41,7 @@ def procurar_funcionario():
 
 def listar_funcionarios():
     print('---------------Listar funcionários---------------')
-    lista_funcionarios = cadastro.listagem()
+    lista_funcionarios = cadastro_funcionario.listagem()
     for funcionario in lista_funcionarios:
         for chave, valor in funcionario.items():
             print(f'| {chave}: {valor}', end='')
@@ -52,13 +51,13 @@ def listar_funcionarios():
 def excluir_funcionario():
     print('---------------Excluir funcionário---------------')
     matricula = int(input('Informe o número de matrícula: '))
-    cadastro.exclusao(matricula)
+    cadastro_funcionario.exclusao(matricula)
 
 
 def alterar_funcionario():
     print('-----------Alterar dados de funcionário-----------')
     matricula = int(input('Informe o número de matrícula: '))
-    funcionario = cadastro.consulta(matricula)
+    funcionario = cadastro_funcionario.consulta(matricula)
     if funcionario:
         for chave, valor in funcionario.items():
             print(f'{chave}: {valor}')
@@ -73,7 +72,7 @@ def alterar_funcionario():
                 print('Opção inválida.')
             escolha = input(
                 'Qual informação gostaria de alterar? Para sair, informe "0". ')
-        cadastro.alteracao(matricula, alteracoes)
+        cadastro_funcionario.alteracao(matricula, alteracoes)
     else:
         print('Funcionário não encontrado')
 
@@ -87,7 +86,7 @@ def listar_holerites():
 
 
 if __name__ == '__main__':
-    cadastro = CadastroFuncionario()
+    cadastro_funcionario = CadastroFuncionario()
     while True:
         opcao = menu()
         if opcao == '1':

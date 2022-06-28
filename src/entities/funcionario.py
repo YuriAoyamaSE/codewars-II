@@ -9,7 +9,7 @@ class Funcionario():
         self.data_admissao = data_admissao
         self.cargo = cargo
         self.comissao = comissao
-        self.matricula = ''
+        self.matricula = 'Funcionário não cadastrado'
 
     def __str__(self):
         return self.nome

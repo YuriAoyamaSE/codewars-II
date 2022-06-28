@@ -4,9 +4,10 @@ class Tributos():
     def __init__(self, salario_base, comissao=0) -> None:
         self.salario_base = salario_base
         self.comissao = comissao
-        self.vencimentos = self.salario_base + self.comissao
+        self.vencimentos = salario_base + comissao
+        self.inss_aliquota = ''
 
-    def inss_aliquota() -> dict:
+    def inss_margem_aliquota(self) -> dict:
         faixa_aliquota = [0.075, 0.09, 0.12, 0.14]
         faixa_teto = [1212.00, 2427.35, 3641.03, 7087.22]
         margem_aliquota = {}
@@ -19,7 +20,7 @@ class Tributos():
         return margem_aliquota
 
     def inss_recolhimento(self) -> float:
-        aliquotas = Tributos.inss_aliquota()
+        aliquotas = self.inss_margem_aliquota()
         valor = self.vencimentos
         recolhimento = 0
         for faixa, aliquota in aliquotas.items():
@@ -28,6 +29,7 @@ class Tributos():
                 recolhimento += faixa * aliquota
             else:
                 recolhimento += valor * aliquota
+                self.inss_aliquota = aliquota
                 return round(recolhimento, 2)
         return round(recolhimento, 2)
 
