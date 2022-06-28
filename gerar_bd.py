@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
   `data_admissao` CHAR(10) NOT NULL,
   `cargo` CHAR(2) NOT NULL,
   `comissao` TINYINT NOT NULL DEFAULT '0',
-  PRIMARY KEY (`matricula`))
+  PRIMARY KEY (`matricula`,'cpf'))
 ENGINE = InnoDB
 AUTO_INCREMENT=100000
 DEFAULT CHARACTER SET = utf8mb3;
