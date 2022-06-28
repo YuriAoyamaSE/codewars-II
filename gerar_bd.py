@@ -37,6 +37,32 @@ CREATE TABLE IF NOT EXISTS `codewars2`.`funcionarios` (
 ENGINE = InnoDB
 AUTO_INCREMENT=100000
 DEFAULT CHARACTER SET = utf8mb3;
+
+CREATE TABLE IF NOT EXISTS `codewars2`.`holerities` (
+  `mes_ano` VARCHAR(20) NOT NULL,
+  `matricula` VARCHAR(45) NOT NULL,
+  `funcionario` VARCHAR(45) NULL,
+  `data_admissao` VARCHAR(45) NULL,
+  `cargo` VARCHAR(45) NULL,
+  `salario_base` VARCHAR(45) NULL,
+  `comissao` VARCHAR(45) NULL,
+  `valor_comissao` VARCHAR(45) NULL,
+  `total_vencimentos` VARCHAR(45) NULL,
+  `faltas` VARCHAR(45) NULL,
+  `valor_faltas` VARCHAR(45) NULL,
+  `tx_inss` VARCHAR(45) NULL,
+  `base_inss` VARCHAR(45) NULL,
+  `valor_inss` VARCHAR(45) NULL,
+  `tx_irrf` VARCHAR(45) NULL,
+  `base_irrf` VARCHAR(45) NULL,
+  `valor_irrf` VARCHAR(45) NULL,
+  `total_descontos` VARCHAR(45) NULL,
+  `base_fgts` VARCHAR(45) NULL,
+  `valor_fgts` VARCHAR(45) NULL,
+  `liquido_receber` VARCHAR(45) NULL,
+  PRIMARY KEY (`mes_ano`, `matricula`));
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
 """
 
 cursor.execute(criar_tabelas)
