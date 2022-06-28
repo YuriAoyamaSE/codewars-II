@@ -13,7 +13,7 @@ class Holerite():
         self.salario_base = funcionario.cargo_salario_base()
         self.comissao = int(funcionario.cargo_comissao_valor()*100)
         self.valor_comissao = round(
-            float(funcionario.cargo_salario_base()) * funcionario.cargo_comissao_valor() / 100, 2)
+            float(funcionario.cargo_salario_base()) * funcionario.cargo_comissao_valor(), 2)
         self.tributos = Tributos(funcionario)
         self.valor_inss = self.tributos.inss_recolhimento()
         self.valor_irrf = self.tributos.irrf_recolhimento()
@@ -56,7 +56,7 @@ Endereço: Rua XV de Novembro, 15, Centro        Mês de referência: {self.mes_
 CNPJ: 12.345.678/0001-00
 ==========================================================================================
 Matricula     Nome do Funcionário       Data de Admissão        Função
-{self.matricula}   {self.nome}        {self.data_admissao}          {self.cargo}
+{self.matricula}        {self.nome}             {self.data_admissao}            {self.cargo}
 ==========================================================================================
 Código    Descrição                 Referência      Proventos         Descontos
    101    Salário Base                   22,50      R$ {self.salario_base}              

@@ -95,8 +95,7 @@ def alterar_funcionario():
     funcionario = checar_funcionario(matricula)
     if funcionario:
         for chave, valor in funcionario.items():
-            print(f'{chave}: {valor}')
-            i += 1
+            print(f'{chave}: {valor}')            
         escolha = input(
             'Qual informação gostaria de alterar? Para sair, informe "0". ')
         alteracoes = {}

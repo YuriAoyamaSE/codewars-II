@@ -22,7 +22,7 @@ class Funcionario():
         output = cursor.fetchall()
         cursor.close()
         cnx.close()
-        return output
+        return output[0][0]
 
     def cargo_salario_base(self) -> float:
         cnx = gerar_cnx()
