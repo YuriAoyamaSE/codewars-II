@@ -95,7 +95,7 @@ def alterar_funcionario():
     funcionario = checar_funcionario(matricula)
     if funcionario:
         for chave, valor in funcionario.items():
-            print(f'{chave}: {valor}')            
+            print(f'{chave}: {valor}')
         escolha = input(
             'Qual informação gostaria de alterar? Para sair, informe "0". ')
         alteracoes = {}
@@ -120,8 +120,8 @@ def holerite_funcionario():
         holerite.imprimir_holerite()
 
 
-def imprimir_lista_holerites():
-    pass
+def imprimir_lista_holerites(lista_de_holerites):
+    print("Ainda a implementar")
 
 
 def listar_holerites_individual():

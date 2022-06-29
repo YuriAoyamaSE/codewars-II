@@ -1,6 +1,6 @@
 # codewars-II
 
-## PROJETO INCOMPLETO:
+## PROJETO INCOMPLETO: paralisado temporariamente (término do prazo de entrega)
 ### => Funcionalidade de holerite em construção
 ### => BD de holerite em construção (criado, não testado)
 ### => Sem tratamento de exceções
